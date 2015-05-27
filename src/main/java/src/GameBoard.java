@@ -8,15 +8,13 @@ import java.util.Arrays;
 public class GameBoard implements GameUtilities {
 
     public static int size;
-    public static int[][] gameBoard;
-    public static int[][] winningBoard;
-//    public static int zeroLocX = 0;
-//    public static int zeroLocY = 0;
+    public static Object[][] gameBoard;
+    public static Object[][] winningBoard;
 
     @Override
-    public int [][] createBoard(){
+    public Object[][] createBoard(){
 
-        gameBoard = new int[size][size];
+        gameBoard = new Object[size][size];
         int k = 1;
         //puts values inside the game board based off the size passed in
         for(int i = 0; i <size; i++)
@@ -33,18 +31,6 @@ public class GameBoard implements GameUtilities {
         size = gameBoardSize;
     }
 
-//    @Override
-//    public boolean locateZero() {
-//            for (int x = 0; x < size; x++)
-//                for (int y = 0; y < size; y++) {
-//                    if (gameBoard[x][y] == 0) {
-//                        zeroLocX = x;
-//                        zeroLocY = y;
-//                    }
-//                }
-//            return true;
-//        }
-
     @Override
     public boolean isWinner(){
         createWinningBoard();
@@ -57,9 +43,9 @@ public class GameBoard implements GameUtilities {
         return false;
     }
 
-    public static int [][] createWinningBoard(){
+    public static Object[][] createWinningBoard(){
 
-        winningBoard = new int[size][size];
+        winningBoard = new Object[size][size];
         int k = 1;
         for(int i = 0; i <size; i++)
             for (int j = 0; j < size; j++) {

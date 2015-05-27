@@ -33,7 +33,7 @@ public class GameMovements implements MoveMaker {
     public static boolean locateZero() {
         for (int x = 0; x < gameBoard.size; x++)
             for (int y = 0; y < gameBoard.size; y++) {
-                if (gameBoard.gameBoard[x][y] == 0) {
+                if (gameBoard.gameBoard[x][y].hashCode() == 0) {
                     zeroLocX = x;
                     zeroLocY = y;
                 }
@@ -42,7 +42,6 @@ public class GameMovements implements MoveMaker {
     }
 
     public void moveDown() {
-
         locateZero();
         if(zeroLocX == gameBoard.size - 1){
             if (hasShuffled) {
@@ -51,7 +50,7 @@ public class GameMovements implements MoveMaker {
         }
         else {
             gameBoard.gameBoard[zeroLocX][zeroLocY] = gameBoard.gameBoard[zeroLocX + 1][zeroLocY];
-            gameBoard.gameBoard[zeroLocX + 1][zeroLocY] = 0; //moves the O value to the value below
+            gameBoard.gameBoard[zeroLocX + 1][zeroLocY] = 0; //moves the 00 value to the value below
             moveCount++;
         }
     }
@@ -65,13 +64,12 @@ public class GameMovements implements MoveMaker {
         }
         else {
             gameBoard.gameBoard[zeroLocX][zeroLocY] = gameBoard.gameBoard[zeroLocX - 1][zeroLocY];
-            gameBoard.gameBoard[zeroLocX - 1][zeroLocY] = 0; //moves the O value to the value below
+            gameBoard.gameBoard[zeroLocX - 1][zeroLocY] = 0; //moves the 00 value to the value above
             moveCount++;
         }
     }
 
     public void moveRight() {
-
         locateZero();
         if(zeroLocY == gameBoard.size - 1) {
             if (hasShuffled) {
@@ -80,7 +78,7 @@ public class GameMovements implements MoveMaker {
         }
         else {
             gameBoard.gameBoard[zeroLocX][zeroLocY] = gameBoard.gameBoard[zeroLocX][zeroLocY +1];
-            gameBoard.gameBoard[zeroLocX][zeroLocY+1] = 0; //moves the O value to the value below
+            gameBoard.gameBoard[zeroLocX][zeroLocY+1] = 0; //moves the 00 value to the value to the right
             moveCount++;
         }
     }
@@ -94,14 +92,13 @@ public class GameMovements implements MoveMaker {
         }
         else {
             gameBoard.gameBoard[zeroLocX][zeroLocY] = gameBoard.gameBoard[zeroLocX][zeroLocY-1];
-            gameBoard.gameBoard[zeroLocX][zeroLocY-1] = 0; //moves the O value to the value below
+            gameBoard.gameBoard[zeroLocX][zeroLocY-1] = 0; //moves the 00 value to the value to the left
             moveCount++;
         }
     }
 
     @Override
     public void moveMaker(int moveDirection) {
-
         switch (moveDirection) {
             case UP:
                 moveUp();
@@ -139,7 +136,6 @@ public class GameMovements implements MoveMaker {
 
                 moveMaker(randomInterger);
             }
-
             hasShuffled = true;
             return true;
         }

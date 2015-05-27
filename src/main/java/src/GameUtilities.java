@@ -7,7 +7,7 @@ public interface GameUtilities {
 
     boolean isWinner();
 
-    int [][] createBoard();
+    Object[][] createBoard();
 
     public void setSize(int gameBoardSize);
 

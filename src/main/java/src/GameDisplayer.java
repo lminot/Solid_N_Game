@@ -14,7 +14,7 @@ public class GameDisplayer implements DisplayGame{
     public boolean display() {
             for (int i = 0; i < gameBoard.size; i++) {
                 for (int j = 0; j < gameBoard.size; j++) {
-                    if (gameBoard.gameBoard[i][j] <= 9) {
+                    if (gameBoard.gameBoard[i][j].hashCode() <= 9) {
                         System.out.format("%02d", gameBoard.gameBoard[i][j]);
                     } else
                         System.out.print(gameBoard.gameBoard[i][j] + "");

@@ -6,7 +6,7 @@ import console_utils.TextDevices;
 /**
  * Created by Lucien.Minot on 4/2/2015.
  */
-public class GameRunner implements Runner {
+public class GameRunner implements Runner{
 
 
     private final TextDevice io;

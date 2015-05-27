@@ -6,58 +6,66 @@ import org.junit.Test;
 import src.*;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
 
-/**
- * Created by Lucien.Minot on 4/14/2015.
- */
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
 public class RunnerTests implements Runner {
 
-    Runner newGame = new GameRunner(TextDevices.defaultTextDevice());
-
+    FakeRunner newGame = new FakeRunner(TextDevices.defaultTextDevice());
+    //QuitGame exit = new QuitGame();
+    GameBoard gameBoard = new GameBoard();
+    GameMovements mover = new GameMovements();
 
     @Override
     public void start() {
-
     }
 
-//    @Test
-//    public void itRunsTheGame() throws Exception
-//    {
-//        newGame.start();
-//    }
+    @Test
+    public void itStartsTheGame() throws IOException {
 
-//    @Test
-//    public void itTakesUserInputForBoardSize(){
-//
-//        final String input = "2";
-//        BufferedReader reader = new BufferedReader(new StringReader(input));
-//        TextDevice fakePlayer = TextDevices.characterDevice(reader, new PrintWriter(System.out, true));
-//        //GameRunner game = new GameRunner(fake);
-//
-//        newGame = new GameRunner(fakePlayer);
-//        newGame.start();
-//
-//
-//    }
-//
-//    @Test
-//     public void itTakesUserInputForShuffles(){
-//
-//        GameBoard gameBoard = new GameBoard();
-//
-//        gameBoard.setSize(3);
-//        gameBoard.createBoard();
-//
-//        final String input = "5";
-//        BufferedReader reader = new BufferedReader(new StringReader(input));
-//        TextDevice fakePlayer = TextDevices.characterDevice(reader, new PrintWriter(System.out, true));
-//        GameRunner game = new GameRunner(fakePlayer);
-//
-//        game.shuffle();
-//
-//    }
+        final String input = "2";
+        BufferedReader reader = new BufferedReader(new StringReader(input));
+        TextDevice fakePlayer = TextDevices.characterDevice(reader, new PrintWriter(System.out, true));
+
+        newGame = new FakeRunner(fakePlayer);
+        assertTrue(FakeRunner.gameStarted);
+    }
+
+    @Test
+    public void itTakesUserInputForGameBoardSize() throws IOException {
+
+        final String input = "4";
+        BufferedReader reader = new BufferedReader(new StringReader(input));
+        TextDevice fakePlayer = TextDevices.characterDevice(reader, new PrintWriter(System.out, true));
+
+        newGame = new FakeRunner(fakePlayer);
+        newGame.FakeStart();
+
+        assertEquals(Integer.parseInt(input), gameBoard.size);
+    }
+
+
+    @Test
+     public void itTakesUserInputForShuffles(){
+
+        gameBoard.setSize(3);
+        gameBoard.createBoard();
+        DisplayGame dis = new GameDisplayer(gameBoard);
+        dis.display();
+
+        final String input = "5000";
+        BufferedReader reader = new BufferedReader(new StringReader(input));
+        TextDevice fakePlayer = TextDevices.characterDevice(reader, new PrintWriter(System.out, true));
+        newGame = new FakeRunner(fakePlayer);
+        newGame.shuffle();
+
+        assertEquals(Integer.parseInt(input), mover.moveCount);
+
+    }
 
 //    @Test
 //    public void itTakesUserInputForMovement(){
@@ -70,7 +78,8 @@ public class RunnerTests implements Runner {
 //        GameRunner game = new GameRunner(fakePlayer);
 //
 //        game.moveReader();
-//        game.moveReader();
+//        //game.moveReader();
+//        exit.quitGame();
 //
 //    }
 }
