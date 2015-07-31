@@ -1,7 +1,8 @@
 package tests;
 
-import console_utils.TextDevice;
-import console_utils.TextDevices;
+import console.TextDevice;
+import console.TextDevices;
+import org.junit.Assert;
 import org.junit.Test;
 import src.*;
 
@@ -16,9 +17,9 @@ import static junit.framework.Assert.assertTrue;
 public class RunnerTests implements Runner {
 
     FakeRunner newGame = new FakeRunner(TextDevices.defaultTextDevice());
-    //QuitGame exit = new QuitGame();
     GameBoard gameBoard = new GameBoard();
-    GameMovements mover = new GameMovements();
+    GameMovements mover = new GameMovements(gameBoard);
+    DisplayGame dis = new GameDisplayer(gameBoard);
 
     @Override
     public void start() {
@@ -54,9 +55,7 @@ public class RunnerTests implements Runner {
 
         gameBoard.setSize(3);
         gameBoard.createBoard();
-        DisplayGame dis = new GameDisplayer(gameBoard);
         dis.display();
-
         final String input = "5000";
         BufferedReader reader = new BufferedReader(new StringReader(input));
         TextDevice fakePlayer = TextDevices.characterDevice(reader, new PrintWriter(System.out, true));
@@ -64,22 +63,21 @@ public class RunnerTests implements Runner {
         newGame.shuffle();
 
         assertEquals(Integer.parseInt(input), mover.moveCount);
-
     }
 
-//    @Test
-//    public void itTakesUserInputForMovement(){
-//
-//        itTakesUserInputForShuffles();
-//
-//        final String input = "2";
-//        BufferedReader reader = new BufferedReader(new StringReader(input));
-//        TextDevice fakePlayer = TextDevices.characterDevice(reader, new PrintWriter(System.out, true));
-//        GameRunner game = new GameRunner(fakePlayer);
-//
-//        game.moveReader();
-//        //game.moveReader();
-//        exit.quitGame();
-//
-//    }
+    @Test
+    public void itTakesUserInputForMovement(){
+
+        gameBoard.setSize(3);
+        gameBoard.createBoard();
+        dis.display();
+        final String input = "1";
+        BufferedReader reader = new BufferedReader(new StringReader(input));
+        TextDevice fakePlayer = TextDevices.characterDevice(reader, new PrintWriter(System.out, true));
+        newGame = new FakeRunner(fakePlayer);
+        newGame.moveReader();
+        dis.display();
+
+        Assert.assertTrue((mover.moveCount > 0));
+    }
 }

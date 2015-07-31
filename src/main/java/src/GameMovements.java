@@ -2,18 +2,12 @@ package src;
 
 import java.util.Random;
 
-/**
- * Created by Lucien.Minot on 4/8/2015.
- */
 public class GameMovements implements MoveMaker {
 
     public static GameBoard gameBoard;
 
     public GameMovements(GameBoard gameBoard){
         this.gameBoard = gameBoard;
-    }
-
-    public GameMovements(){
     }
 
     GameOver exit = new QuitGame();
@@ -24,8 +18,8 @@ public class GameMovements implements MoveMaker {
     public static final int LEFT  = 3;
     public static final int RIGHT = 4;
 
-    private static int zeroLocX = 0;
-    private static int zeroLocY = 0;
+    public static int zeroLocX = 0;
+    public static int zeroLocY = 0;
 
     public static int moveCount = 0;
     public static boolean hasShuffled = false;
@@ -130,8 +124,7 @@ public class GameMovements implements MoveMaker {
             return false;
         }
         else {
-            // while loop to force  movement ONLY inside the bounds of the board
-            while (moveCount < shuffles) {
+            while (moveCount < shuffles) {  // while loop to force  movement ONLY inside the bounds of the board
                 int randomInterger = random.nextInt((max - min) + 1) + min;
 
                 moveMaker(randomInterger);

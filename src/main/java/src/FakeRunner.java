@@ -1,7 +1,7 @@
 package src;
 
-import console_utils.TextDevice;
-import console_utils.TextDevices;
+import console.TextDevice;
+import console.TextDevices;
 
 /**
  * Created by Lucien.Minot on 4/2/2015.
