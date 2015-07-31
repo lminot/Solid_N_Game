@@ -9,10 +9,10 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Lucien.Minot on 4/10/2015.
  */
-public class MoverMakerTests implements MoveMaker {
+public class MoverMakerTests  {
 
     private GameUtilities gameBoard;
-   // private DisplayGame newDisplay;
+    private DisplayGame newDisplay;
     private GameMovements mover;
     private MoveMaker newMoves;
 
@@ -25,35 +25,21 @@ public class MoverMakerTests implements MoveMaker {
     public void setUp(){
 
         gameBoard = new GameBoard();
-        //newDisplay = new GameDisplayer((GameBoard)gameBoard);
+        newDisplay = new GameDisplayer((GameBoard)gameBoard);
         newMoves = new GameMovements((GameBoard)gameBoard);
         mover = new GameMovements((GameBoard)gameBoard);
         int moveCounter = mover.moveCount = 0;
         GameMovements.hasShuffled = false;
     }
 
-    @Override
-    public void moveMaker(int moveDirection) {}
-
-    @Override
-    public boolean shuffleBoard(int shuffles) {
-        return false;
-    }
-//
-//    @Override
-//    public boolean display() {
-//        return true;
-//    }
-
     @Test
     public void itLocatesTheZero() throws Exception
     {
         gameBoard.setSize(4);
         gameBoard.createBoard();
-        //newDisplay.display();
+        newDisplay.display();
 
         assertEquals(true, GameMovements.locateZero());
-        //assertEquals(true, display());
     }
 
     @Test
@@ -61,9 +47,8 @@ public class MoverMakerTests implements MoveMaker {
     {
         gameBoard.setSize(2);
         gameBoard.createBoard();
-        moveMaker(2);
         mover.moveUp();
-        //newDisplay.display();
+        newDisplay.display();
 
         assertEquals(1, mover.moveCount);
     }
@@ -76,7 +61,7 @@ public class MoverMakerTests implements MoveMaker {
         mover.moveUp();
         mover.moveUp();
         mover.moveDown();
-        //newDisplay.display();
+        newDisplay.display();
 
         assertEquals(3, mover.moveCount);
     }
@@ -87,7 +72,7 @@ public class MoverMakerTests implements MoveMaker {
         gameBoard.setSize(2);
         gameBoard.createBoard();
         mover.moveLeft();
-        //newDisplay.display();
+        newDisplay.display();
 
         assertEquals(1, mover.moveCount);
     }
@@ -100,7 +85,7 @@ public class MoverMakerTests implements MoveMaker {
         mover.moveLeft();
         mover.moveLeft();
         mover.moveRight();
-        //newDisplay.display();
+        newDisplay.display();
 
         assertEquals(3, mover.moveCount);
     }
@@ -111,8 +96,7 @@ public class MoverMakerTests implements MoveMaker {
         gameBoard.setSize(3);
         gameBoard.createBoard();
         newMoves.shuffleBoard(10);
-        shuffleBoard(10);
-        //newDisplay.display();
+        newDisplay.display();
 
         assertEquals(10, mover.moveCount);
     }
@@ -137,7 +121,7 @@ public class MoverMakerTests implements MoveMaker {
     {
         gameBoard.setSize(3);
         gameBoard.createBoard();
-        //newDisplay.display();
+        newDisplay.display();
         newMoves.moveMaker(up);
         newMoves.moveMaker(left);
         newMoves.moveMaker(down);
@@ -151,7 +135,7 @@ public class MoverMakerTests implements MoveMaker {
     {
         gameBoard.setSize(3);
         gameBoard.createBoard();
-        //newDisplay.display();
+        newDisplay.display();
 
         mover.shuffleBoard(0);
 
