@@ -14,16 +14,13 @@ import java.io.StringReader;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
-public class RunnerTests implements Runner {
+public class RunnerTests {
 
     FakeRunner newGame = new FakeRunner(TextDevices.defaultTextDevice());
     GameBoard gameBoard = new GameBoard();
     GameMovements mover = new GameMovements(gameBoard);
     DisplayGame dis = new GameDisplayer(gameBoard);
 
-    @Override
-    public void start() {
-    }
 
     @Test
     public void itStartsTheGame() throws IOException {
@@ -34,6 +31,7 @@ public class RunnerTests implements Runner {
 
         newGame = new FakeRunner(fakePlayer);
         assertTrue(FakeRunner.gameStarted);
+
     }
 
     @Test

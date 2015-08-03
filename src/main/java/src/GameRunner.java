@@ -8,11 +8,13 @@ import console.TextDevices;
  */
 public class GameRunner implements Runner{
 
-
     private final TextDevice io;
     GameUtilities gameBoard = new GameBoard();
     GameDisplayer displayer = new GameDisplayer((GameBoard) gameBoard);
     MoveMaker mover = new GameMovements((GameBoard) gameBoard);
+    MessageDisplayer messager = new MessageHandler();
+
+
 
     public GameRunner(TextDevice io) {
         this.io = io;
@@ -22,11 +24,11 @@ public class GameRunner implements Runner{
     public void start() {
         int size = 0;
 
-        io.printf("Enter an integer greater than 1 for the game board size: \n", size);
+        io.printf("Please enter an integer greater than 1 for the game board size: \n", size);
         int enteredSize = readNumber();
 
         if(enteredSize < 2) {
-            System.out.println("Error please enter a number greater than 1...");
+            messager.createBoardError();
             start();
         }
         else {
@@ -41,7 +43,7 @@ public class GameRunner implements Runner{
             while (!gameBoard.isWinner()) {
                 moveReader();
                 displayer.display();
-                System.out.println("Moves made: " + GameMovements.moveCount);
+                messager.movesMade(GameMovements.moveCount);
             }
         }
     }
@@ -59,7 +61,7 @@ public class GameRunner implements Runner{
 
         int shuffleNumber = readNumber();
         if(shuffleNumber == 0) {
-            System.out.println("Error please enter a number greater than 0...");
+            messager.shuffleError();
             shuffle();
         }
         else {
