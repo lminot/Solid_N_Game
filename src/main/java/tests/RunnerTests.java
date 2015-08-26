@@ -1,7 +1,7 @@
 package tests;
 
-import console.TextDevice;
-import console.TextDevices;
+import utils.TextDevice;
+import utils.TextDevices;
 import org.junit.Assert;
 import org.junit.Test;
 import src.*;

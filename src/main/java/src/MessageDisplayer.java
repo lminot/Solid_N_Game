@@ -10,4 +10,8 @@ public interface MessageDisplayer {
    public boolean movesMade(int moveNumber);
 
    public boolean shuffleError();
+
+   public boolean newBoardDispalyMessage();
+
+    public boolean howToMoveMessage();
 }

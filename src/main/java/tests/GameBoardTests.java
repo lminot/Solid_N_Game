@@ -16,7 +16,6 @@ public class GameBoardTests {
     private DisplayGame displayer;
     private GameMovements mover;
 
-    private int moveCounter;
 
     @Before
     public void setUp(){
@@ -24,9 +23,6 @@ public class GameBoardTests {
         gameBoard = new GameBoard();
         displayer = new GameDisplayer((GameBoard) gameBoard);
         mover = new GameMovements((GameBoard) gameBoard);
-
-        moveCounter = mover.moveCount = 0;
-
     }
 
     @Test

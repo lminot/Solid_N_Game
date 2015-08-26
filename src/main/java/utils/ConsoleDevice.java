@@ -1,4 +1,4 @@
-package console;
+package utils;
 
 import java.io.Console;
 import java.io.PrintWriter;

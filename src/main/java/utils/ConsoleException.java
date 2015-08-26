@@ -1,4 +1,4 @@
-package console;
+package utils;
 
 /**
  * Created by Lucien.Minot on 4/2/2015.

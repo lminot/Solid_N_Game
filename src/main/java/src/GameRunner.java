@@ -1,7 +1,7 @@
 package src;
 
-import console.TextDevice;
-import console.TextDevices;
+import utils.TextDevice;
+import utils.TextDevices;
 
 /**
  * Created by Lucien.Minot on 4/2/2015.
@@ -9,6 +9,14 @@ import console.TextDevices;
 public class GameRunner implements Runner{
 
     private final TextDevice io;
+    private  String enterBoardSizeMessage = MessageHandler.enterBoardSize;
+    private String enterMoveDirectionMessage = MessageHandler.enterMoveDirection;
+    private String enterShuffleNumberMessage = MessageHandler.enterShuffleNumber;
+
+    private int size = 0;
+    private int move = 0;
+    private int shuffleNum = 0;
+
     GameUtilities gameBoard = new GameBoard();
     GameDisplayer displayer = new GameDisplayer((GameBoard) gameBoard);
     MoveMaker mover = new GameMovements((GameBoard) gameBoard);
@@ -22,22 +30,20 @@ public class GameRunner implements Runner{
 
     @Override
     public void start() {
-        int size = 0;
-
-        io.printf("Please enter an integer greater than 1 for the game board size: \n", size);
+        io.printf(enterBoardSizeMessage, size);
         int enteredSize = readNumber();
 
-        if(enteredSize < 2) {
+        if(enteredSize < 2 ) {
             messager.createBoardError();
             start();
-        }
-        else {
-
+        } else {
         gameBoard.setSize(enteredSize);
         gameBoard.createBoard();
+        messager.newBoardDispalyMessage();
         displayer.display();
 
         shuffle();
+        messager.howToMoveMessage();
         GameMovements.moveCount = 0;
 
             while (!gameBoard.isWinner()) {
@@ -49,16 +55,13 @@ public class GameRunner implements Runner{
     }
 
     public void moveReader(){
-        int move = 0;
-        io.printf("1 = up, 2 = down, 3 = left, 4 = right, 0 = quit\n", move);
+        io.printf(enterMoveDirectionMessage, move);
         int enteredMove = readNumber();
         mover.moveMaker(enteredMove);
     }
 
     public void shuffle(){
-        int shuffleNum = 0;
-        io.printf("Shuffle the board how many times?\n", shuffleNum);
-
+        io.printf(enterShuffleNumberMessage, shuffleNum);
         int shuffleNumber = readNumber();
         if(shuffleNumber == 0) {
             messager.shuffleError();
@@ -77,6 +80,7 @@ public class GameRunner implements Runner{
             } catch (NumberFormatException e) {}
         }
     }
+
 
     public static void main(String[] args) {
         //GameRunner runner = new GameRunner(TextDevices.defaultTextDevice());

@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.Before;
 import org.junit.Test;
 import src.*;
 
@@ -11,28 +12,50 @@ import static org.junit.Assert.assertEquals;
  */
 public class MessagerTests {
 
-    @Test public void itDisplaysAnErrorMessage()throws Exception {
-        MessageHandler messenger = new MessageHandler();
-        String errorMessage = messenger.showError();
+    MessageHandler messenger;
 
-        assertEquals("error", errorMessage);
+    @Before
+    public void setUp(){
+       messenger = new MessageHandler();
     }
 
     @Test public void itDisplaysABoardSizeErrorForValuesUnderOne() throws Exception {
-        MessageHandler messenger = new MessageHandler();
-        assertTrue("error message shown", messenger.createBoardError());
-        //assertEquals("Error please enter a number greater than 1...", boardSizeError);
+
+        assertTrue("error message not shown", messenger.createBoardError());
     }
 
     @Test public void itDisplaysAMessageForMovesMade() throws Exception{
-        MessageHandler messenger = new MessageHandler();
         int moveNumber = 1;
-        assertTrue("error message shown", messenger.movesMade(moveNumber));
+        assertTrue("error message not shown", messenger.movesMade(moveNumber));
     }
 
     @Test public void itDisplaysAShuffleNumberErrorForValuesUnderZero() throws Exception {
-        MessageHandler messenger = new MessageHandler();
-        assertTrue("error message shown", messenger.shuffleError());
+
+        assertTrue("error message not shown", messenger.shuffleError());
     }
 
+    @Test public void itDisplaysNewBoardMessage() throws Exception {
+
+        assertTrue("error message not shown", messenger.newBoardDispalyMessage());
+    }
+
+    @Test public void itDisplaysHowToMoveMessage() throws Exception {
+
+        assertTrue("error message not shown", messenger.howToMoveMessage());
+    }
+
+    @Test public void itDisplaysEnterBoardSizeMessage() throws Exception {
+
+        assertEquals(messenger.enterBoardSize, "Please enter an integer greater than 1 for the game board size: \n");
+    }
+
+    @Test public void itDisplaysEnterMoveDirectionMessage() throws Exception {
+
+        assertEquals(messenger.enterMoveDirection, "1 = up, 2 = down, 3 = left, 4 = right, 0 = quit\n");
+    }
+
+    @Test public void itDisplaysEnterShuffleNumbernMessage() throws Exception {
+
+        assertEquals(messenger.enterShuffleNumber, "Shuffle the board how many times?\n");
+    }
 }
