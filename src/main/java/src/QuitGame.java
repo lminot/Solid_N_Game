@@ -6,11 +6,12 @@ package src;
 public class QuitGame implements GameOver {
 
     public static boolean quitGame = false;
+    MessageDisplayer messager = new MessageHandler();
 
     @Override
     public void quitGame() {
         quitGame = true;
-        System.out.println("Quiting game..");
+        messager.quittingGameMessage();
         System.exit(0);
     }
 

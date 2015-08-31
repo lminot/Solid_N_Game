@@ -13,14 +13,13 @@ public class FakeRunner implements Runner {
     public static int size = 0;
     public static int move = 0;
     private final TextDevice io;
-    //private final TextDevice printer;
+
     GameUtilities gameBoard = new GameBoard();
     GameDisplayer displayer = new GameDisplayer((GameBoard) gameBoard);
     MoveMaker mover = new GameMovements((GameBoard) gameBoard);
 
     public FakeRunner(TextDevice io) {
         this.io = io;
-        //this.printer = printer;
         gameStarted = true;
     }
 
@@ -29,7 +28,6 @@ public class FakeRunner implements Runner {
         int enteredSize = readNumber();
 
         if (enteredSize < 2 ) {
-            //printer.writer();
             System.out.println("Error please enter a number greater than 1...");
             start();
         } else {

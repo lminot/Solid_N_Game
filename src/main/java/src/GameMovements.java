@@ -5,6 +5,7 @@ import java.util.Random;
 public class GameMovements implements MoveMaker {
 
     public static GameBoard gameBoard;
+    MessageDisplayer messager = new MessageHandler();
 
     public GameMovements(GameBoard gameBoard){
         this.gameBoard = gameBoard;
@@ -18,18 +19,18 @@ public class GameMovements implements MoveMaker {
     public static final int LEFT  = 3;
     public static final int RIGHT = 4;
 
-    public static int zeroLocX = 0;
-    public static int zeroLocY = 0;
+    public static int zeroXLocation = 0;
+    public static int zeroYLocation = 0;
 
     public static int moveCount = 0;
-    public static boolean hasShuffled = false;
+    public static boolean boardHasShuffled = false;
 
     public static boolean locateZero() {
         for (int x = 0; x < gameBoard.size; x++)
             for (int y = 0; y < gameBoard.size; y++) {
                 if (gameBoard.gameBoard[x][y].hashCode() == 0) {
-                    zeroLocX = x;
-                    zeroLocY = y;
+                    zeroXLocation = x;
+                    zeroYLocation = y;
                 }
             }
         return true;
@@ -37,56 +38,56 @@ public class GameMovements implements MoveMaker {
 
     public void moveDown() {
         locateZero();
-        if(zeroLocX == gameBoard.size - 1){
-            if (hasShuffled) {
-                System.out.println("Cannot move down from current position!");
+        if(zeroXLocation == gameBoard.size - 1){
+            if (boardHasShuffled) {
+                messager.moveDownErrorMessage();
             }
         }
         else {
-            gameBoard.gameBoard[zeroLocX][zeroLocY] = gameBoard.gameBoard[zeroLocX + 1][zeroLocY];
-            gameBoard.gameBoard[zeroLocX + 1][zeroLocY] = 0; //moves the 00 value to the value below
+            gameBoard.gameBoard[zeroXLocation][zeroYLocation] = gameBoard.gameBoard[zeroXLocation + 1][zeroYLocation];
+            gameBoard.gameBoard[zeroXLocation + 1][zeroYLocation] = 0; //moves the 00 value to the value below
             moveCount++;
         }
     }
 
     public void moveUp() {
         locateZero();
-        if(zeroLocX == 0){
-            if (hasShuffled) {
-                System.out.println("Cannot move up from current position!");
+        if(zeroXLocation == 0){
+            if (boardHasShuffled) {
+                messager.moveUpErrorMessage();
             }
         }
         else {
-            gameBoard.gameBoard[zeroLocX][zeroLocY] = gameBoard.gameBoard[zeroLocX - 1][zeroLocY];
-            gameBoard.gameBoard[zeroLocX - 1][zeroLocY] = 0; //moves the 00 value to the value above
+            gameBoard.gameBoard[zeroXLocation][zeroYLocation] = gameBoard.gameBoard[zeroXLocation - 1][zeroYLocation];
+            gameBoard.gameBoard[zeroXLocation - 1][zeroYLocation] = 0; //moves the 00 value to the value above
             moveCount++;
         }
     }
 
     public void moveRight() {
         locateZero();
-        if(zeroLocY == gameBoard.size - 1) {
-            if (hasShuffled) {
-                System.out.println("Cannot move right from current position!");
+        if(zeroYLocation == gameBoard.size - 1) {
+            if (boardHasShuffled) {
+                messager.moveRightErrorMessage();
             }
         }
         else {
-            gameBoard.gameBoard[zeroLocX][zeroLocY] = gameBoard.gameBoard[zeroLocX][zeroLocY +1];
-            gameBoard.gameBoard[zeroLocX][zeroLocY+1] = 0; //moves the 00 value to the value to the right
+            gameBoard.gameBoard[zeroXLocation][zeroYLocation] = gameBoard.gameBoard[zeroXLocation][zeroYLocation +1];
+            gameBoard.gameBoard[zeroXLocation][zeroYLocation +1] = 0; //moves the 00 value to the value to the right
             moveCount++;
         }
     }
 
     public void moveLeft() {
         locateZero();
-        if(zeroLocY == 0){
-            if (hasShuffled) {
-                System.out.println("Cannot move left from current position!");
+        if(zeroYLocation == 0){
+            if (boardHasShuffled) {
+                messager.moveLeftErrorMessage();
             }
         }
         else {
-            gameBoard.gameBoard[zeroLocX][zeroLocY] = gameBoard.gameBoard[zeroLocX][zeroLocY-1];
-            gameBoard.gameBoard[zeroLocX][zeroLocY-1] = 0; //moves the 00 value to the value to the left
+            gameBoard.gameBoard[zeroXLocation][zeroYLocation] = gameBoard.gameBoard[zeroXLocation][zeroYLocation -1];
+            gameBoard.gameBoard[zeroXLocation][zeroYLocation -1] = 0; //moves the 00 value to the value to the left
             moveCount++;
         }
     }
@@ -110,7 +111,7 @@ public class GameMovements implements MoveMaker {
                 exit.quitGame();
                 break;
             default:
-                System.out.println("Invalid input!");
+                messager.invalidMoveMessage();
                 break;
         }
     }
@@ -129,7 +130,7 @@ public class GameMovements implements MoveMaker {
 
                 moveMaker(randomInterger);
             }
-            hasShuffled = true;
+            boardHasShuffled = true;
             return true;
         }
     }

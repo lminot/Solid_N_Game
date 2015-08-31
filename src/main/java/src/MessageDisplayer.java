@@ -13,5 +13,17 @@ public interface MessageDisplayer {
 
    public boolean newBoardDispalyMessage();
 
-    public boolean howToMoveMessage();
+   public boolean howToMoveMessage();
+
+   public boolean moveUpErrorMessage();
+
+   public boolean moveDownErrorMessage();
+
+   public boolean moveLeftErrorMessage();
+
+   public boolean moveRightErrorMessage();
+
+   public boolean invalidMoveMessage();
+
+   public boolean quittingGameMessage();
 }

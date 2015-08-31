@@ -1,13 +1,10 @@
-package tests; /**
- * Created by Lucien.Minot on 10/2/2014.
- */
+package tests;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import src.*;
-
 import static org.junit.Assert.*;
 
 public class GameBoardTests {
@@ -16,10 +13,9 @@ public class GameBoardTests {
     private DisplayGame displayer;
     private GameMovements mover;
 
-
     @Before
-    public void setUp(){
-
+    public void setUp()
+    {
         gameBoard = new GameBoard();
         displayer = new GameDisplayer((GameBoard) gameBoard);
         mover = new GameMovements((GameBoard) gameBoard);
@@ -32,13 +28,11 @@ public class GameBoardTests {
         gameBoard.createBoard();
 
         Assert.assertEquals(4, gameBoard.createBoard().length);
-
     }
 
     @Test
     public void itDisplaysTheBoard() throws Exception
     {
-
         gameBoard.setSize(6);
         gameBoard.createBoard();
 
@@ -58,7 +52,6 @@ public class GameBoardTests {
     @Test
     public void itChecksNonWinningBoard() throws Exception
     {
-
         gameBoard.setSize(3);
         gameBoard.createBoard();
         displayer.display();
@@ -67,13 +60,11 @@ public class GameBoardTests {
         gameBoard.isWinner();
 
         assertFalse(gameBoard.isWinner());
-
     }
 
     @Test
     public void itChecksWinningBoard() throws Exception
     {
-
         gameBoard.setSize(3);
         gameBoard.createBoard();
         displayer.display();
@@ -83,7 +74,6 @@ public class GameBoardTests {
         displayer.display();
 
         assertEquals(true, gameBoard.isWinner());
-
     }
 
     @Rule

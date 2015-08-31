@@ -34,7 +34,7 @@ public class GameBoard implements GameUtilities {
     @Override
     public boolean isWinner(){
         createWinningBoard();
-             if(GameMovements.hasShuffled) {
+             if(GameMovements.boardHasShuffled) {
                  if (Arrays.deepEquals(winningBoard, gameBoard)) {
                      System.out.println("YOU WIN!!!!");
                      return true;

@@ -1,5 +1,6 @@
 package src;
 
+
 import utils.TextDevice;
 import utils.TextDevices;
 
@@ -9,7 +10,7 @@ import utils.TextDevices;
 public class GameRunner implements Runner{
 
     private final TextDevice io;
-    private  String enterBoardSizeMessage = MessageHandler.enterBoardSize;
+    private String enterBoardSizeMessage = MessageHandler.enterBoardSize;
     private String enterMoveDirectionMessage = MessageHandler.enterMoveDirection;
     private String enterShuffleNumberMessage = MessageHandler.enterShuffleNumber;
 
@@ -21,8 +22,6 @@ public class GameRunner implements Runner{
     GameDisplayer displayer = new GameDisplayer((GameBoard) gameBoard);
     MoveMaker mover = new GameMovements((GameBoard) gameBoard);
     MessageDisplayer messager = new MessageHandler();
-
-
 
     public GameRunner(TextDevice io) {
         this.io = io;
@@ -83,9 +82,6 @@ public class GameRunner implements Runner{
 
 
     public static void main(String[] args) {
-        //GameRunner runner = new GameRunner(TextDevices.defaultTextDevice());
-        //runner.start();
-
         Runner newGame = new GameRunner(TextDevices.defaultTextDevice());
         newGame.start();
     }

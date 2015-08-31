@@ -29,7 +29,7 @@ public class MoverMakerTests  {
         newMoves = new GameMovements((GameBoard)gameBoard);
         mover = new GameMovements((GameBoard)gameBoard);
         int moveCounter = mover.moveCount = 0;
-        GameMovements.hasShuffled = false;
+        GameMovements.boardHasShuffled = false;
     }
 
     @Test
@@ -139,6 +139,6 @@ public class MoverMakerTests  {
 
         mover.shuffleBoard(0);
 
-        assertEquals(false, GameMovements.hasShuffled);
+        assertEquals(false, GameMovements.boardHasShuffled);
     }
 }
